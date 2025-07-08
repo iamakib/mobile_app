@@ -129,7 +129,9 @@ export default function Homescreen() {
         <View style={styles.tempSection}>
           <TouchableOpacity onPress={() => setIsCelsius(!isCelsius)}>
             <Text style={styles.tempText}>
-              {isCelsius ? forecast?.current?.temp_c : forecast?.current?.temp_f}&#176;
+              {isCelsius
+                ? `${forecast?.current?.temp_c}°C`
+                : `${forecast?.current?.temp_f}°F`}
             </Text>
           </TouchableOpacity>
           <Text style={styles.conditionText}>
