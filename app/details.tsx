@@ -1,15 +1,15 @@
+import { useLocalSearchParams } from 'expo-router';
+import React, { useEffect, useState } from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
   Image,
   ImageBackground,
   ScrollView,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useLocalSearchParams } from 'expo-router';
 
 export default function Details() {
   const { date_epoch, city } = useLocalSearchParams();
@@ -82,7 +82,13 @@ export default function Details() {
           </TouchableOpacity>
 
           <Text style={styles.rangeText}>
-            Max: {forecastDay.day.maxtemp_c}° / Min: {forecastDay.day.mintemp_c}°
+            Max: {isCelsius
+              ? `${forecastDay.day.maxtemp_c}°C`
+              : `${forecastDay.day.maxtemp_f}°F`} / 
+              
+              Min: {isCelsius
+                ? `${forecastDay.day.mintemp_c}°C`
+                : `${forecastDay.day.mintemp_f}°F`}
           </Text>
         </View>
 
@@ -98,7 +104,7 @@ export default function Details() {
                 style={{ height: 40, width: 40 }}
               />
               <Text style={styles.hourText}>
-                {isCelsius ? hour.temp_c : hour.temp_f}°
+                {isCelsius ? `${hour.temp_c} °C`: `${hour.temp_f} °F`}
               </Text>
             </View>
           ))}
@@ -165,7 +171,7 @@ const styles = StyleSheet.create({
     padding: 12,
     alignItems: 'center',
     marginRight: 12,
-    marginBottom:80,
+    marginBottom: 80,
     width: 80,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
